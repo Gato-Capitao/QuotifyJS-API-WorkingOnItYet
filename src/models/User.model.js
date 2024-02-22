@@ -1,5 +1,5 @@
 import { database } from "../database/connection.js"
-import { DataType, DataTypes, Sequelize } from "sequelize"
+import { DataTypes, DataTypes, Sequelize } from "sequelize"
 
 export const UserModel = database.define("tb_users", {
     id:{
