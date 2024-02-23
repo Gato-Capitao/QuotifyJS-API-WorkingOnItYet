@@ -1,15 +1,23 @@
 import { database } from "../database/connection.js"
 import { DataTypes, Sequelize } from "sequelize"
 
-export const UserModel = database.define("tb_users", {
+const TopicModel = database.define("tb_topics", {
     id:{
         type: DataTypes.UUID,
         unique: true,
         primaryKey: true,
         defaultValue: Sequelize.UUID
     },
-    username:{
-        type: DataTypes.STRING(20),
+
+    title:{
+        type: DataTypes.STRING(50),
         allowNull: false,
+    },
+
+    description:{
+        type: DataTypes.TEXT,
+        allowNull: false
     }
 })
+
+export {TopicModel}
