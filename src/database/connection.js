@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize"
 
-export const database = new Sequelize("db_quotify", "root", "",{
+const database = new Sequelize("db_quotify", "root", "",{
     host: "localhost",
     dialect: "mysql"
 })
@@ -14,3 +14,5 @@ export async function tryToConnect(){
         console.log("Error trying to establish connection")
     }
 }
+
+export {database}
