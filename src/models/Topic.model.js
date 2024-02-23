@@ -15,7 +15,7 @@ const TopicModel = database.define("tb_topics", {
     },
 
     description:{
-        type: text,
+        type: DataTypes.TEXT,
         allowNull: false
     }
 })
