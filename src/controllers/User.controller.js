@@ -1,26 +1,15 @@
 import { database } from "../database/connection.js"
 import { UserModel } from "../models/User.model.js"
+import { UserService } from "../services/User.service.js"
 
 export async function createUser(req, res){
-    try{
-        const {username, email, password} = req.body
-        await database.sync()
-        await UserModel.create({username, email, password})
-        return res.status(201).json({message:"Created user sucessfully!"})
-    }catch(error){
-        return res.status(404).json({error: error.message})
-    }
+    const { username, email, password } = req.body
+    return await UserService.createUser(username, email, password)
 }
 
 export async function getUser(req, res){
-    try{
-        const { id } = req.body
-        await database.sync()
-        const user = await UserModel.findByPk(id)
-        return res.status(200).json({user})
-    }catch(error){
-        return res.status(404).json({error: error.message})
-    }
+    const {id} = req.body
+    return await UserService.getUser(id)
 }
 
 export async function updateUsersPassword(req, res){
