@@ -11,5 +11,17 @@ export const UserModel = database.define("tb_users", {
     username:{
         type: DataTypes.STRING(20),
         allowNull: false,
+    },
+
+    email:{
+        type: DataTypes.STRING,
+        validate:{
+            isEmail: true
+        },
+    },
+
+    password:{
+        type: DataTypes.STRING(60),
+        allowNull: false,
     }
 })
