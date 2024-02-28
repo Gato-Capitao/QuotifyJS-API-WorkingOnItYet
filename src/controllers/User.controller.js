@@ -16,7 +16,7 @@ export async function getUser(req, res){
     try{
         const { id } = req.body
         await database.sync()
-        const user = UserModel.findByPk(id)
+        const user = await UserModel.findByPk(id)
         return res.status(200).json({user})
     }catch(error){
         return res.status(404).json({error: error.message})
@@ -25,10 +25,10 @@ export async function getUser(req, res){
 
 export async function updateUsersPassword(req, res){
     try{
-        const { id, oldPassword, newPassword} = req.body
+        const { id, password, newPassword} = req.body
         await database.sync()
         const user = await UserModel.findByPk(id)
-        if(user.password === oldPassword){
+        if(user.password === password){
             user.update({password:newPassword})
             return res.status(200).json({message:"Password updated!"})
         }

@@ -6,7 +6,7 @@ export const UserModel = database.define("tb_users", {
         type: DataTypes.UUID,
         unique: true,
         primaryKey: true,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
     },
     username:{
         type: DataTypes.STRING(20),

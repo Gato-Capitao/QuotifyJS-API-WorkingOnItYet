@@ -21,7 +21,7 @@ routerUser.post("/user/update-password", async (req, res) => {
 })
 
 routerUser.post("/user/delete-account", async (req, res) => {
-    return await updateUsersPassword(req, res)
+    return await deleteUser(req, res)
 })
 
 export {routerUser}
