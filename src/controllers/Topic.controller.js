@@ -1,10 +1,13 @@
 import { TopicModel } from "../models/Topic.model.js"
 import { database } from "../database/connection.js"
 
-const createTopic = async (title, description) => {
-    await database.sync()
-    await TopicModel.create({title, description})
-    return TopicModel.findAll()
+export async function createTopic(req, res){
+    try{
+        const {title, description} = req.body
+        await database.sync()
+        await TopicModel.create({title, description})
+        return res.status(201).json({message:"Created topic sucessfully!"})
+    }catch(error){
+        return res.status(404).json({error: error.message})
+    }
 }
-
-export {createTopic}
