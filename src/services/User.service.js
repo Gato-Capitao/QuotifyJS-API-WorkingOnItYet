@@ -82,4 +82,22 @@ export class UserService{
             }
         }
     }
+
+    async deleteUser(id){
+        try{
+            await database.sync()
+            const user = await UserModel.findByPk(id)
+            user.destroy()
+            return {
+                statusValue: 200,
+                message: "User destroyed!"
+            }
+        }catch(error){
+            return {
+                statusValue: 404,
+                message: error.message
+            }
+        }
+
+    }
 }
