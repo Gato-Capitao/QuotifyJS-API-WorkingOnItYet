@@ -2,46 +2,34 @@ import { database } from "../database/connection.js"
 import { UserModel } from "../models/User.model.js"
 import { UserService } from "../services/User.service.js"
 
+const instanceUsersService = new UserService()
+
 export async function createUser(req, res){
     const { username, email, password } = req.body
-    return await UserService.createUser(username, email, password)
+    const {statusValue, message} = await instanceUsersService.createUser(username, email, password)
+    return res.status(statusValue).json({message: message})
 }
 
 export async function getUser(req, res){
     const {id} = req.body
-    return await UserService.getUser(id)
+    const {statusValue, message, user} = await instanceUsersService.getUser(id)
+    return res.status(statusValue).json({
+        message: message,
+        user: user
+    })
+    
 }
 
 export async function updateUsersPassword(req, res){
-    try{
         const { id, password, newPassword} = req.body
-        await database.sync()
-        const user = await UserModel.findByPk(id)
-        if(user.password === password){
-            user.update({password:newPassword})
-            return res.status(200).json({message:"Password updated!"})
-        }
-
-        return res.json({error: "Wrong password!"})
-    }catch(error){
-        return res.status(404).json({error: error.message})
-    }
+        const {statusValue, message} = await instanceUsersService.updatePassword(id, password, newPassword)
+        return res.status(statusValue).json({message: message})
 }
 
 export async function updateUsername(req, res){
-    try{
-        const { id, password, newUsername} = req.body
-        await database.sync()
-        const user = await UserModel.findByPk(id)
-        if(user.password === password){
-            user.update({username:newUsername})
-            return res.status(200).json({message:"Username updated!"})
-        }
-
-        return res.json({error: "Wrong password!"})
-    }catch(error){
-        return res.status(404).json({error: error.message})
-    }
+    const { id, password, newUsername} = req.body
+    const {statusValue, message} = await instanceUsersService.updateUsername(id, password, newUsername)
+    return res.status(statusValue).json({message: message})
 }
 
 export async function deleteUser(req, res){
