@@ -1,5 +1,3 @@
-import { database } from "../database/connection.js"
-import { UserModel } from "../models/User.model.js"
 import { UserService } from "../services/User.service.js"
 
 const instanceUsersService = new UserService()
