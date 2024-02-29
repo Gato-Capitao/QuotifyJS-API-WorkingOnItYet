@@ -1,10 +1,11 @@
 import { Router } from "express"
 import { createUser, getUser, updateUsername, updateUsersPassword, deleteUser } from "../controllers/User.controller.js"
-import { IsBodyValid } from "../middleware/userValidation.js"
+import { UserValidator } from "../middleware/User.validator.js"
 
 const routerUser = Router()
+const instanceUserValidator = new UserValidator()
 
-routerUser.post("/register-user", IsBodyValid, async (req, res) =>{
+routerUser.post("/register-user", instanceUserValidator.createUserValidation, async (req, res) =>{
     return await createUser(req, res)
 })
 
