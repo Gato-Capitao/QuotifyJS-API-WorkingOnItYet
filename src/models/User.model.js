@@ -6,10 +6,23 @@ export const UserModel = database.define("tb_users", {
         type: DataTypes.UUID,
         unique: true,
         primaryKey: true,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
     },
     username:{
         type: DataTypes.STRING(20),
+        allowNull: false,
+    },
+
+    email:{
+        type: DataTypes.STRING,
+        validate:{
+            isEmail: true
+        },
+        unique: true,
+    },
+
+    password:{
+        type: DataTypes.STRING(60),
         allowNull: false,
     }
 })
