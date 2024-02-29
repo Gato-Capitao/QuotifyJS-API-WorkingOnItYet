@@ -8,19 +8,19 @@ routerUser.post("/register-user", IsBodyValid, async (req, res) =>{
     return await createUser(req, res)
 })
 
-routerUser.post("/user/get", async (req, res) => {
+routerUser.get("/user/get", async (req, res) => {
     return await getUser(req, res)
 })
 
-routerUser.post("/user/update-username", async (req, res) => {
+routerUser.put("/user/update-username", async (req, res) => {
     return await updateUsername(req, res)
 })
 
-routerUser.post("/user/update-password", async (req, res) => {
+routerUser.put("/user/update-password", async (req, res) => {
     return await updateUsersPassword(req, res)
 })
 
-routerUser.post("/user/delete-account", async (req, res) => {
+routerUser.delete("/user/delete-account", async (req, res) => {
     return await deleteUser(req, res)
 })
 
