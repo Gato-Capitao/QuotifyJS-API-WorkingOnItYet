@@ -1,5 +1,6 @@
 import { UserModel } from "../models/User.model.js"
 import { database } from "../database/connection.js"
+import { ERROS, SUCCESS } from "../shared/messages.js"
 
 export class UserService{
     async createUser(username, email, password){
@@ -8,7 +9,7 @@ export class UserService{
             await UserModel.create({username, email, password})
             return {
                 statusValue: 201,
-                message: "Created user sucessfully!"
+                message: `Created ${SUCCESS.USER}`
             }
         }catch(error){
             return {
@@ -24,7 +25,7 @@ export class UserService{
             const user = await UserModel.findByPk(id)
             return {
                 statusValue:200,
-                message: "Returned user sucessfully!",
+                message: `Returned ${SUCCESS.USER}`,
                 user: user
             }
         }catch(error){
@@ -43,13 +44,13 @@ export class UserService{
                 user.update({password:newPassword})
                 return {
                     statusValue: 200,
-                    message: "Password updated!"
+                    message: `Password ${SUCCESS.UPDATED}`
                 }
             }
     
             return {
                 statusValue: 200,
-                message: "Wrong password!"
+                message: ERROS.WRONG_PASSWORD
             }
         }catch(error){
             return {
@@ -67,13 +68,13 @@ export class UserService{
                 user.update({username: newUsername})
                 return {
                     statusValue: 200,
-                    message: "Username updated!"
+                    message: `Username ${SUCCESS.UPDATED}`
                 }
             }
     
             return {
                 statusValue: 200,
-                message: "Wrong password!"
+                message: ERROS.WRONG_PASSWORD
             }
         }catch(error){
             return {
@@ -90,7 +91,7 @@ export class UserService{
             user.destroy()
             return {
                 statusValue: 200,
-                message: "User destroyed!"
+                message: `User ${SUCCESS.DELETED}`
             }
         }catch(error){
             return {
