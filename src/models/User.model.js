@@ -18,6 +18,7 @@ export const UserModel = database.define("tb_users", {
         validate:{
             isEmail: true
         },
+        unique: true,
     },
 
     password:{
