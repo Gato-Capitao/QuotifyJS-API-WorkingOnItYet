@@ -3,7 +3,7 @@ import { routerUser } from "./routes/User.routes.js"
 import { routerTopic } from "./routes/Topic.routes.js"
 import { tryToConnect } from "./database/connection.js"
 
-const server = express()
+export const server = express()
 const port = 8001
 
 server.use(express.json())
