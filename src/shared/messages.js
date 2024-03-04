@@ -1,6 +1,7 @@
 export const ERROS = {
     WRONG_PASSWORD: "Wrong password!",
-    NOT_FOUND: "not found!"
+    NOT_FOUND: "not found!",
+    USER_NEEDS: "The user needs a"
 }
 
 export const SUCCESS = {
