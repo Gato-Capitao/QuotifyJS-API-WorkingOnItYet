@@ -9,19 +9,19 @@ routerUser.post("/register-user", instanceUserValidator.createUserValidation, as
     return await createUser(req, res)
 })
 
-routerUser.get("/user/get", async (req, res) => {
+routerUser.get("/user/get", instanceUserValidator.getUserValidation,async (req, res) => {
     return await getUser(req, res)
 })
 
-routerUser.put("/user/update-username", async (req, res) => {
+routerUser.put("/user/update-username", instanceUserValidator.updateUsernameValidation,async (req, res) => {
     return await updateUsername(req, res)
 })
 
-routerUser.put("/user/update-password", async (req, res) => {
+routerUser.put("/user/update-password", instanceUserValidator.updatePasswordValidation,async (req, res) => {
     return await updateUsersPassword(req, res)
 })
 
-routerUser.delete("/user/delete-account", async (req, res) => {
+routerUser.delete("/user/delete-account", instanceUserValidator.deleteUserValidation,async (req, res) => {
     return await deleteUser(req, res)
 })
 
