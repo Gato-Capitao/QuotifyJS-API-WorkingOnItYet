@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "test": "set NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles && jest --detectOpenHandles",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles && jest",
     "dev": "nodemon run src/server.js"
   },
   "keywords": [],
