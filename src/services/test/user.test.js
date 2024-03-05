@@ -1,7 +1,6 @@
 import { UserService } from "../User.service.js";
 import { UserModel } from "../../models/User.model.js";
 
-
 afterEach(async () => {
   await UserModel.destroy({ where: {} });
 });
