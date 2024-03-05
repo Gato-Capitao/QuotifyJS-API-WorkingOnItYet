@@ -8,4 +8,5 @@ export const SUCCESS = {
     USER: "user successfully!",
     UPDATED: "updated successfully!",
     DELETED: "deleted successfully!",
+    TOPIC:"topic sucessfully!"
 }
