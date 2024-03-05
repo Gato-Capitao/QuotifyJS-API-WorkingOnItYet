@@ -1,6 +1,7 @@
 import { database } from "../database/connection.js"
 import { TopicModel } from "../models/Topic.model.js"
-import { SUCCESS } from "../shared/messages.js"
+import { UserModel } from "../models/User.model.js"
+import { SUCCESS, ERROS } from "../shared/messages.js"
 
 export async function createTopic(title, description, userId){
     try{
@@ -10,8 +11,54 @@ export async function createTopic(title, description, userId){
             statusValue:201,
             message: `Created ${SUCCESS.TOPIC}`
         }
-    }catch{
+    }catch(error){
         return{
+            statusValue: 404,
+            message: error.message
+        }
+    }
+}
+
+export async function getTopic(id){
+    try{
+        await database.sync()
+        await TopicModel.findByPk(id)
+        return {
+            statusValue: 200,
+            message: `Returned ${SUCCESS.TOPIC}`
+        }
+    }catch(error){
+        return {
+            statusValue: 404,
+            message: error.message
+        }
+    }
+}
+
+
+export async function updateTitle(userId, topicId,password, newTitle){
+    try{
+        const user = await UserModel.findByPk(userId)
+        const topic = await TopicModel.findByPk(topicId)
+        const errors = []
+
+        if(!user){errors.push(`The user doesn't exist.`)}
+        if(!topic){errors.push(`The topic doesn't exist.`)}
+        if(user.password !== password){`${ERROS.WRONG_PASSWORD}`}
+
+        if(errors.length){
+            return {
+                statusValue: 404,
+                message: errors
+            }
+        }
+
+        return {
+            statusValue: 200,
+            message: `Title ${SUCCESS.UPDATED}`
+        }
+    }catch(error){
+        return {
             statusValue: 404,
             message: error.message
         }
