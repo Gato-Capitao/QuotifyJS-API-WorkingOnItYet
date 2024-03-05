@@ -67,3 +67,33 @@ export async function updateTitle(userId, topicId,password, newTitle){
     }
 }
 
+export async function updateDescription(userId, topicId, password, newDescription){
+    try{
+        const user = await UserModel.findByPk(userId)
+        const topic = await TopicModel.findByPk(topicId)
+        const errors = []
+
+        if(!user){errors.push(`The user doesn't exist.`)}
+        if(!topic){errors.push(`The topic doesn't exist.`)}
+        if(user.password !== password){`${ERROS.WRONG_PASSWORD}`}
+
+        if(errors.length){
+            return {
+                statusValue: 404,
+                message: errors
+            }
+        }
+
+        topic.update({description: newDescription})
+        return {
+            statusValue: 200,
+            message: `Description ${SUCCESS.UPDATED}`
+        }
+    }catch(error){
+        return {
+            statusValue: 404,
+            message: error.message
+        }
+    }
+}
+
