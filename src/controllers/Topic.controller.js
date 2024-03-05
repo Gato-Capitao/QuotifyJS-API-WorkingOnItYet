@@ -23,3 +23,13 @@ export async function getTopic(req, res){
     }
 }
 
+export async function updateTitle(req, res){
+    try{
+        const { newTitle, topicId, userId, password } = req.body
+        const response = await instanceTopicService.updateTitle(userId, topicId, password, newTitle)
+        return res.status(response.statusValue).json({response})
+    }catch(error){
+        return res.status(404).json({error: error.message})
+    }
+}
+
