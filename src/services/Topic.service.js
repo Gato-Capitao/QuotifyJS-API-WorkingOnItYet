@@ -22,9 +22,10 @@ export async function createTopic(title, description, userId){
 export async function getTopic(id){
     try{
         await database.sync()
-        await TopicModel.findByPk(id)
+        const topic = await TopicModel.findByPk(id)
         return {
             statusValue: 200,
+            topic: topic,
             message: `Returned ${SUCCESS.TOPIC}`
         }
     }catch(error){
@@ -53,6 +54,7 @@ export async function updateTitle(userId, topicId,password, newTitle){
             }
         }
 
+        topic.update({title:newTitle})
         return {
             statusValue: 200,
             message: `Title ${SUCCESS.UPDATED}`
@@ -64,3 +66,4 @@ export async function updateTitle(userId, topicId,password, newTitle){
         }
     }
 }
+
