@@ -12,3 +12,14 @@ export async function createTopic(req, res){
         return res.status(404).json({error: error.message})
     }
 }
+
+export async function getTopic(req, res){
+    try{
+        const {id} = req.body
+        const response = await instanceTopicService.getTopic(id)
+        return res.status(response.statusValue).json({response})
+    }catch(error){
+        return res.status(404).json({error: error.message})
+    }
+}
+
