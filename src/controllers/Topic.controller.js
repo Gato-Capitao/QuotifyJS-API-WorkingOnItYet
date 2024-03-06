@@ -1,4 +1,3 @@
-import { TopicModel } from "../models/Topic.model.js"
 import { TopicService } from "../services/Topic.service.js"
 
 const instanceTopicService = new TopicService()
