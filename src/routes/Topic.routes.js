@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createTopic } from "../controllers/Topic.controller.js"
+import { createTopic, getTopic, updateTitle } from "../controllers/Topic.controller.js"
 
 const routerTopic = Router()
 

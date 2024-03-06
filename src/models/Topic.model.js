@@ -23,9 +23,10 @@ const TopicModel = database.define("tb_topics", {
     creatorId:{
         type: DataTypes.UUID,
         references:{
-            model:"UserModel",
+            model:"tb_users",
             key:"id"
-        }
+        },
+        allowNull: false
     }
 })
 
