@@ -7,7 +7,7 @@ const TopicModel = database.define("tb_topics", {
         type: DataTypes.UUID,
         unique: true,
         primaryKey: true,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
     },
 
     title:{
