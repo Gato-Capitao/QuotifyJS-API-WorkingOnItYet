@@ -4,10 +4,10 @@ import { UserModel } from "../models/User.model.js"
 import { SUCCESS, ERROS } from "../shared/messages.js"
 
 export class TopicService{
-    async createTopic(title, description, userId){
+    async createTopic(title, description, creatorId){
         try{
             await database.sync()
-            await TopicModel.create(title, description, userId)
+            await TopicModel.create({title, description, creatorId})
             return {
                 statusValue:201,
                 message: `Created ${SUCCESS.TOPIC}`

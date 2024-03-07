@@ -3,8 +3,8 @@ import { TopicService } from "../services/Topic.service.js"
 const instanceTopicService = new TopicService()
 
 export async function createTopic(req, res){
-    const {title, description, userId} = req.body
-    const { statusValue, message} = await instanceTopicService.createTopic(title, description, userId)
+    const {title, description, creatorId} = req.body
+    const { statusValue, message} = await instanceTopicService.createTopic(title, description, creatorId)
     return res.status(statusValue).json({message: message})
 }
 
