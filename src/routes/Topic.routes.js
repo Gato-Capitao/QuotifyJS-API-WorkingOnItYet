@@ -19,7 +19,7 @@ routerTopic.patch("/topics/update-description", async (req, res)=>{
     return await updateDescription(req, res)
 })
 
-routerTopic.delete("/topic/deleteTopic", async (req, res)=>{
+routerTopic.delete("/topic/delete-topic", async (req, res)=>{
     return await deleteTopic(req, res)
 })
 
