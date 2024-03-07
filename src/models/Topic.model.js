@@ -1,12 +1,13 @@
 import { database } from "../database/connection.js"
 import { DataTypes, Sequelize } from "sequelize"
+import { UserModel } from "./User.model.js"
 
 const TopicModel = database.define("tb_topics", {
     id:{
         type: DataTypes.UUID,
         unique: true,
         primaryKey: true,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
     },
 
     title:{
@@ -23,9 +24,10 @@ const TopicModel = database.define("tb_topics", {
     creatorId:{
         type: DataTypes.UUID,
         references:{
-            model:"UserModel",
-            key:"id"
-        }
+            model: UserModel,
+            key: UserModel.id
+        },
+        allowNull: false
     }
 })
 
