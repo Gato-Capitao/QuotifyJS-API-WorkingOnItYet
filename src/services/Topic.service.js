@@ -65,18 +65,10 @@ export class TopicService{
         try{
             const user = await UserModel.findByPk(userId)
             const topic = await TopicModel.findByPk(topicId)
-            const errors = []
 
-            if(!user){errors.push(`The user doesn't exist.`)}
-            if(!topic){errors.push(`The topic doesn't exist.`)}
-            if(user.password !== password){`${ERROS.WRONG_PASSWORD}`}
-
-            if(errors.length){
-                return {
-                    statusValue: 404,
-                    message: errors
-                }
-            }
+            if(!user) return {statusValue: 404, message:`The user doesn't exist.`}
+            if(!topic) return {statusValue: 404, message:`The topic doesn't exist.`}
+            if(user.password !== password) return {statusValue: 404, message:`${ERROS.WRONG_PASSWORD}`}
 
             topic.update({description: newDescription})
             return {
