@@ -91,7 +91,7 @@ export class TopicService{
 
             if(!user) return {statusValue: 404, message:`The user doesn't exist.`}
             if(!topic) return {statusValue: 404, message:`The topic doesn't exist.`}
-            if(user.id !== topic.id) return {statusValue: 404, message: `Only the creator can delete the topic.`}
+            if(user.id !== topic.creatorId) return {statusValue: 404, message: `Only the creator can delete the topic.`}
             if(user.password !== password) return {statusValue: 404, message:`${ERROS.WRONG_PASSWORD}`}
 
             topic.destroy()

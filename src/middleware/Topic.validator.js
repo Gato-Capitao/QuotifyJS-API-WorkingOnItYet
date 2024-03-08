@@ -1,4 +1,4 @@
-import { ERROS } from "../shared/messages";
+import { ERROS } from "../shared/messages.js";
 export class TopicValidator{
     async createTopicValidation(req, res, next){
         const { title, description, creatorId } = req.body || {}
@@ -73,8 +73,8 @@ export class TopicValidator{
     }
 
     async deleteTopicValidation(req, res, next){
-        const { id } = req.body || {}
-        const fields = ["id"]
+        const { topicId, userId, password } = req.body || {}
+        const fields = ["topicId", "userId", "password"]
         const erros = []
 
         for(const field of fields){
