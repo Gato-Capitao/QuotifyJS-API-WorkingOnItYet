@@ -7,7 +7,8 @@ const QuoteModel = database.define("tb_quotes", {
     id:{
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
     },
 
     quote:{
@@ -15,20 +16,23 @@ const QuoteModel = database.define("tb_quotes", {
         allowNull: false
     },
 
-    public:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: Sequelize.BOOLEAN
+    topicId:{
+        type: DataTypes.UUID,
+        references:{
+            model: TopicModel,
+            key: TopicModel.id
+        },
+        allowNull: false
+    },
+
+    creatorId:{
+        type: DataTypes.UUID,
+        references:{
+            model: UserModel,
+            key: UserModel.id
+        },
+        allowNull: false
     }
-})
-
-QuoteModel.belongsTo(UserModel, {
-    foreignKey: "senderId",
-    constraints: true
-})
-
-QuoteModel.belongsTo(TopicModel, {
-    foreignKey: "topicId",
-    constraints: true
 })
 
 export {QuoteModel}
