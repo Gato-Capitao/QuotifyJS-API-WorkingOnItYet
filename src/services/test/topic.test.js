@@ -33,4 +33,9 @@ test("The creator can update the title", async ()=>{
     const responseUser = await instanceUserService.createUser("test", "test@topic.test", "test_test")
     const responseTopic = await instanceTopicService.createTopic("A title", "A description", responseUser.userId)
 
+    const responseUpdateTopic = await instanceTopicService.updateTitle(responseUser.userId, responseTopic.topicId, "test_test", "A new title")
+
+    expect(responseUser.statusValue).toEqual(201)
+    expect(responseTopic.statusValue).toEqual(201)
+    expect(responseUpdateTopic.statusValue).toEqual(201)
 })
