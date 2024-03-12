@@ -10,7 +10,7 @@ export class UserService{
             return {
                 statusValue: 201,
                 message: `Created ${SUCCESS.USER}`,
-                id: newUser.id
+                userId: newUser.id
             }
         }catch(error){
             return {

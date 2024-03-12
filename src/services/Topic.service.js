@@ -7,10 +7,11 @@ export class TopicService{
     async createTopic(title, description, creatorId){
         try{
             await database.sync()
-            await TopicModel.create({title, description, creatorId})
+            const newTopic = await TopicModel.create({title, description, creatorId})
             return {
                 statusValue:201,
-                message: `Created ${SUCCESS.TOPIC}`
+                message: `Created ${SUCCESS.TOPIC}`,
+                topicId: newTopic.id
             }
         }catch(error){
             return{
