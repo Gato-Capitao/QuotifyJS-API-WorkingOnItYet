@@ -20,7 +20,7 @@ test("The user can create a topic", async ()=>{
 })
 
 test("The user can't create more than one topic with a certain title", async ()=>{
-    const responseUser = await instanceUserService.createUser("test, user@topic.com", "test_test")
+    const responseUser = await instanceUserService.createUser("test", "user@topic.test", "test_test")
     const responseFirstTopic = await instanceTopicService.createTopic("A title", "a description", responseUser.userId)
     const responseSecondTopic = await instanceTopicService.createTopic("A title", "a description", responseUser.userId)
 
@@ -37,5 +37,5 @@ test("The creator can update the title", async ()=>{
 
     expect(responseUser.statusValue).toEqual(201)
     expect(responseTopic.statusValue).toEqual(201)
-    expect(responseUpdateTopic.statusValue).toEqual(201)
+    expect(responseUpdateTopic.statusValue).toEqual(200)
 })
