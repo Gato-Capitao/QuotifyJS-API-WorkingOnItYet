@@ -29,13 +29,19 @@ test("The user can't create more than one topic with a certain title", async ()=
     expect(responseSecondTopic.statusValue).toEqual(404)
 })
 
-test("The creator can update the title", async ()=>{
-    const responseUser = await instanceUserService.createUser("test", "test@topic.test", "test_test")
-    const responseTopic = await instanceTopicService.createTopic("A title", "A description", responseUser.userId)
+test("Only the creator can update the title", async ()=>{
+    const responseUserCreator = await instanceUserService.createUser("test", "test@topic.test", "test_test")
+    const responseRandomUser = await instanceUserService.createUser("test", "randomGuy@topic.test", "test_test")
+    const responseTopic = await instanceTopicService.createTopic("A title", "A description", responseUserCreator.userId)
 
-    const responseUpdateTopic = await instanceTopicService.updateTitle(responseUser.userId, responseTopic.topicId, "test_test", "A new title")
+    const responseUpdateRandomTry = await instanceTopicService.updateTitle(responseRandomUser.userId, responseTopic.topicId, "test_test", "A new title")
+    const responseUpdateCreatorTry = await instanceTopicService.updateTitle(responseUserCreator.userId, responseTopic.topicId, "test_test", "A really new title")
 
-    expect(responseUser.statusValue).toEqual(201)
+    expect(responseUserCreator.statusValue).toEqual(201)
+    expect(responseRandomUser.statusValue).toEqual(201)
+
     expect(responseTopic.statusValue).toEqual(201)
-    expect(responseUpdateTopic.statusValue).toEqual(200)
+    
+    expect(responseUpdateRandomTry.statusValue).toEqual(404)
+    expect(responseUpdateCreatorTry.statusValue)
 })
