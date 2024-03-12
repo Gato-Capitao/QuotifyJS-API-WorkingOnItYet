@@ -12,18 +12,25 @@ afterEach(async () => {
 });
 
 test("The user can create a topic", async ()=>{
-    const responseUser = await instanceUserService.createUser("test", "user@test.test", "test_test")
+    const responseUser = await instanceUserService.createUser("test", "user@topic.test", "test_test")
     const responseTopic = await instanceTopicService.createTopic("Resilience", "Quotes about resilience", responseUser.userId)
 
+    expect(responseUser.statusValue).toEqual(201)
     expect(responseTopic.statusValue).toEqual(201)
 })
 
 test("The user can't create more than one topic with a certain title", async ()=>{
-    const responseUser = await instanceUserService.createUser("test, user@test.com", "test_test")
-    await instanceTopicService.createTopic("A title", "a description", responseUser.userId)
-    const responseTopic = await instanceTopicService.createTopic("A title", "a description", responseUser.userId)
+    const responseUser = await instanceUserService.createUser("test, user@topic.com", "test_test")
+    const responseFirstTopic = await instanceTopicService.createTopic("A title", "a description", responseUser.userId)
+    const responseSecondTopic = await instanceTopicService.createTopic("A title", "a description", responseUser.userId)
 
-    expect(responseTopic.statusValue).toEqual(404)
+    expect(responseUser.statusValue).toEqual(201)
+    expect(responseFirstTopic.statusValue).toEqual(201)
+    expect(responseSecondTopic.statusValue).toEqual(404)
 })
 
+test("The creator can update the title", async ()=>{
+    const responseUser = await instanceUserService.createUser("test", "test@topic.test", "test_test")
+    const responseTopic = await instanceTopicService.createTopic("A title", "A description", responseUser.userId)
 
+})
