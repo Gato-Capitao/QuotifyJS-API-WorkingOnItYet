@@ -11,12 +11,21 @@ afterEach(async () => {
     await UserModel.destroy({where: {}})
 });
 
-test("Can create a topic", async ()=>{
+test("The user can create a topic", async ()=>{
     const user1 = await instanceUserService.createUser("test", "user1@test.test", "test_test")
     const response = await instanceTopicService.createTopic("Resilience", "Quotes about resilience", user1.id)
 
-    console.log(response)
+
     expect(response.statusValue).toEqual(201)
 })
+
+test("The user can't create more than one topic with a certain title", async ()=>{
+    const user1 = await instanceUserService.createUser("test, user1@test.com", "test_test")
+    await instanceTopicService.createTopic("A title", "a description", user1.id)
+    const response2 = await instanceTopicService.createTopic("A title", "a description", user1.id)
+
+    expect(response2.statusValue).toEqual(404)
+})
+
 
 
