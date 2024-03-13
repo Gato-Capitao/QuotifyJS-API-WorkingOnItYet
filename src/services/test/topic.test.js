@@ -43,5 +43,5 @@ test("Only the creator can update the title", async ()=>{
     expect(responseTopic.statusValue).toEqual(201)
     
     expect(responseUpdateRandomTry.statusValue).toEqual(404)
-    expect(responseUpdateCreatorTry.statusValue)
+    expect(responseUpdateCreatorTry.statusValue).toEqual(200)
 })
