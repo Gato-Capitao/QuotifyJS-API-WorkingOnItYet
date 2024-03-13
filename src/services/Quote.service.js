@@ -6,10 +6,10 @@ export class QuoteService{
     async createQuote(quote, creatorId, topicId){
         try{
             await database.sync()
-            const quote = await QuoteModel.create(quote, topicId, creatorId)
+            const newQuote = await QuoteModel.create(quote, topicId, creatorId)
             return {
                 statusValue: 201,
-                quoteId: quote.id,
+                quoteId: newQuote.id,
                 message: `Created ${SUCCESS.QUOTE}`
             }
         }catch(error){
