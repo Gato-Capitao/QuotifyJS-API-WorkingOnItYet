@@ -6,10 +6,11 @@ export class UserService{
     async createUser(username, email, password){
         try{
             await database.sync()
-            await UserModel.create({username, email, password})
+            const newUser = await UserModel.create({username, email, password})
             return {
                 statusValue: 201,
-                message: `Created ${SUCCESS.USER}`
+                message: `Created ${SUCCESS.USER}`,
+                userId: newUser.id
             }
         }catch(error){
             return {
