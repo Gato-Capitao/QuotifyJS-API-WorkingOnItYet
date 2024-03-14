@@ -10,7 +10,7 @@ const port = 8001
 server.use(express.json())
 server.use(routerUser)
 server.use(routerTopic)
-server.use()
+server.use(routerQuote)
 
 server.listen(port, () => {
     tryToConnect()

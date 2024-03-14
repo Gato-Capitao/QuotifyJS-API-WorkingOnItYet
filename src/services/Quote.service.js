@@ -8,7 +8,7 @@ export class QuoteService{
     async createQuote(quote, creatorId, topicId){
         try{
             await database.sync()
-            const newQuote = await QuoteModel.create(quote, topicId, creatorId)
+            const newQuote = await QuoteModel.create({quote, topicId, creatorId})
             return {
                 statusValue: 201,
                 quoteId: newQuote.id,
@@ -17,7 +17,7 @@ export class QuoteService{
         }catch(error){
             return {
                 message: error.message,
-                statusValue: error.statusValue
+                statusValue: 404
             }
         }
     }
@@ -36,11 +36,11 @@ export class QuoteService{
 
             return {
                 statusValue: 200,
-                message: `Deleted ${ERROS.QUOTE}`
+                message: `Deleted ${SUCCESS.QUOTE}`
             }
         }catch(error){
             return {
-                statusValue: error.statusValue,
+                statusValue: 404,
                 message: error.message
             }
         }
