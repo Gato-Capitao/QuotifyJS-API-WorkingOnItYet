@@ -50,7 +50,7 @@ export class UserService{
             }
     
             return {
-                statusValue: 200,
+                statusValue: 404,
                 message: ERROS.WRONG_PASSWORD
             }
         }catch(error){
