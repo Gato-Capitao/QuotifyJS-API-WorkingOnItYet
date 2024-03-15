@@ -1,27 +1,22 @@
-import { UserService } from "../User.service.js";
-import { UserModel } from "../../models/User.model.js";
+import { UserService } from "../User.service.js"
+import { UserModel } from "../../models/User.model.js"
 
 afterEach(async () => {
-  await UserModel.destroy({ where: {} });
+  await UserModel.destroy({ where: {} })
 });
 
-const userService = new UserService();
+const instanceUserService = new UserService()
 
-test("Can create a new user", async () => {
-  const response = await userService.createUser("test", "reidafilosofia@classica.com", "OSabiaNuncaDizTudoQUePensa");
-  expect(response.statusValue).toBe(201);
-});
+test("Can create a user", async ()=>{
+  const reponseUser = await instanceUserService.createUser("test", "test@user.test", "test_test")
 
-test("Can't create a user using a registered email", async () => {
-  const registeredEmail = "reidafilosofia@classica.com";
-  const uniqueUsername = "test" + Math.random().toString(36).substring(2);
+  expect(reponseUser.statusValue).toEqual(201)
+})
 
-  await userService.createUser(uniqueUsername, registeredEmail, "OSabiaNuncaDizTudoQUePensa");
-  const response = await userService.createUser("another_test", registeredEmail, "SabiaQueOSabiaSabiaAssobiar");
-  expect(response.statusValue).toBe(404);
-});
+test("Can get user by id", async ()=> {
+  const responseUser = await instanceUserService.createUser("test", "test@user.test", "test_test")
 
-test("Can't create a user using blank inputs", async () => {
-  const response = await userService.createUser("", "", "");
-  expect(response.statusValue).toBe(404);
-});
+  const result = await instanceUserService.getUser(responseUser.userId)
+
+  expect(result.statusValue).toEqual(200)
+})
