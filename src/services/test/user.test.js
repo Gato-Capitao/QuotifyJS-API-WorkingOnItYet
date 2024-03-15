@@ -42,3 +42,12 @@ test("The user can update username only using the right password", async ()=>{
     expect(resultWrongPassword.statusValue).toEqual(404)
     expect(resultRightPassword.statusValue).toEqual(200)
 })
+
+test("Can delete the user", async ()=>{
+    const responseUser = await instanceUserService.createUser("test", "test@user.test", "test_test")
+
+    const responseDelete = await instanceUserService.deleteUser(responseUser.userId)
+
+    expect(responseUser.statusValue).toEqual(201)
+    expect(responseDelete.statusValue).toEqual(200)
+})
