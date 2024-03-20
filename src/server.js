@@ -17,3 +17,4 @@ server.listen(port, () => {
     console.log("Running")
 })
 
+export default server
